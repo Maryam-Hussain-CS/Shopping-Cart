@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { remove, increment, decrement } from "../store/cartSlice";
+import "./Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Cart = () => {
       <div className="cartWrapper">
         {products.map((product) => (
           <div key={product.id} className="cartCard">
-            <img src={product.image} alt="" />
+            <img src={product.image} alt={product.title} className="CartImg" />
             <h5>{product.title}</h5>
             <h>Rs. {product.price}</h>
             <div className="quantity">

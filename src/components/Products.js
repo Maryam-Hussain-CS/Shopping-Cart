@@ -8,6 +8,7 @@ import {
   clear,
 } from "../store/productSlice";
 import { STATUSES } from "../store/productSlice";
+import "./Products.css";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -50,19 +51,23 @@ const Products = () => {
     <div className="productsWrapper">
       {products.map((product) => (
         <div className="card" key={product.id}>
-          <Link className="link-style"
+          <Link
+            className="link-style"
             to={`/product/${product.id}`}
             onClick={() => dispatch(selectProduct(product))}
           >
             <div className="product-image">
-              <img src={product.image} alt={product.title} />
+              <img
+                src={product.image}
+                alt={product.title}
+                className="productImg"
+              />
             </div>
             <div className="product-content">
               <h4>{product.title}</h4>
               <p>Category: {product.category}</p>
               <p>Price: Rs. {product.price}</p>
             </div>
-
           </Link>
         </div>
       ))}

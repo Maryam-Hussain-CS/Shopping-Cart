@@ -1,0 +1,117 @@
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+      'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 20px;
+    /* background: whitesmoke; */
+  }
+  
+  .productImg {
+    height: 100px;
+    background: black;
+  }
+  
+  .card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+    width: 250px;
+    vertical-align: top;
+    display: inline-block;
+    margin: 10px;
+  }
+  
+  .productsWrapper {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 100%;
+  }
+  
+  .btn {
+    border: none;
+    outline: none;
+    background: #764abc;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+  }
+  
+  .btn:hover {
+    background: #513282;
+  }
+  
+  .heading {
+    padding: 25px 0;
+  }
+  
+  .cartCount {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 40px;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+  }
+  
+  .cartCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 5px;
+  }
+  
+  .counter-btn {
+    background-color: gray;
+    color: white;
+    border: none;
+  }
+  
+  .card:hover {
+    transform: scale(1.1);
+  }
+  
+  .product-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .product-content{
+    font-size: 15px;
+    margin: 0;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  
+  .product-content:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  
+  .link-style {
+    text-decoration: none;
+  }
