@@ -1,0 +1,43 @@
+
+.product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .product-detail img {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px;
+  }
+  
+  .product-detail h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .product-detail p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .product-detail h4 {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  
+  .product-detail .quantity {
+    margin: 10px 0;
+  }
+  
+  .product-detail .quantity span {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+  
+  .product-detail .btn {
+    margin: 10px 0;
+  }
+  

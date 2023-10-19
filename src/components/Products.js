@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add } from "../store/cartSlice";
-import { setProducts, setStatus, clear } from "../store/productSlice";
+import { Link } from "react-router-dom";
+import {
+  setProducts,
+  selectProduct,
+  setStatus,
+  clear,
+} from "../store/productSlice";
 import { STATUSES } from "../store/productSlice";
 
 const Products = () => {
@@ -15,7 +20,7 @@ const Products = () => {
       try {
         const res = await fetch("https://fakestoreapi.com/products");
         if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
+          throw Error(`HTTP error! Status: ${res.status}`);
         }
         const data = await res.json();
         dispatch(setProducts(data));
@@ -33,10 +38,6 @@ const Products = () => {
     };
   }, [dispatch]);
 
-  const handleAddToCart = (product) => {
-    dispatch(add(product));
-  };
-
   if (status === STATUSES.LOADING) {
     return <h2>Loading...</h2>;
   }
@@ -49,12 +50,20 @@ const Products = () => {
     <div className="productsWrapper">
       {products.map((product) => (
         <div className="card" key={product.id}>
-          <img src={product.image} alt={product.title} />
-          <h4>{product.title}</h4>
-          <h5>{product.price}</h5>
-          <button onClick={() => handleAddToCart(product)} className="btn">
-            Add to cart
-          </button>
+          <Link className="link-style"
+            to={`/product/${product.id}`}
+            onClick={() => dispatch(selectProduct(product))}
+          >
+            <div className="product-image">
+              <img src={product.image} alt={product.title} />
+            </div>
+            <div className="product-content">
+              <h4>{product.title}</h4>
+              <p>Category: {product.category}</p>
+              <p>Price: Rs. {product.price}</p>
+            </div>
+
+          </Link>
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 export const STATUSES = Object.freeze({
   IDLE: "idle",
@@ -10,7 +10,8 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     data: [],
-    status: STATUSES.IDLE,
+    status: "idle",
+    selectedProduct: null,
   },
   reducers: {
     setProducts(state, action) {
@@ -21,10 +22,14 @@ const productSlice = createSlice({
     },
     clear(state) {
       state.data = [];
-      state.status = STATUSES.IDLE;
+      state.status = "idle";
+    },
+    selectProduct(state, action) {
+      state.selectedProduct = action.payload;
     },
   },
 });
 
-export const { setProducts, setStatus, clear } = productSlice.actions;
+export const { setProducts, setStatus, clear, selectProduct } =
+  productSlice.actions;
 export default productSlice.reducer;
