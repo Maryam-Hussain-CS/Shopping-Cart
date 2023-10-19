@@ -25,15 +25,18 @@ const ProductDetail = () => {
               className="ProductDetailImg"
             />
           </div>
-          <p>{product.description}</p>
+          <p className="product-detail-description">
+            <h4>Product Details: </h4>
+            {product.description}
+          </p>
         </div>
         <div className="right-column">
           <p className="product-detail-category">
-            Category: {product.category}
+            <strong>Category: </strong>{product.category}
           </p>
-          <p className="product-detail-price">Price: Rs. {product.price}</p>
+          <p className="product-detail-price"><strong>Price: </strong>Rs. {product.price}</p>
           <div className="quantity">
-            <span className="product-detail-qty">Qty: </span>
+            <span className="product-detail-qty"><strong>Qty: </strong></span>
             <button
               className="counter-btn"
               onClick={() => decrement(product.id)}

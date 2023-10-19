@@ -9,18 +9,83 @@ body {
     background: whitesmoke;
 }
 
-.CartImg {
+.custom-cart-empty-msg {
+    font-size: 25px;
+    text-align: center;
+}
+
+.custom-cart-img {
     height: 100px;
 }
 
-/* .cartWrapper{
-    background: yellow;
-} */
+.custom-cart-wrapper {
+    display: flex;
+    flex-direction: column;
+}
 
-.btn {
+.custom-cart-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 5px;
+    background-color: white;;
+}
+
+
+.custom-cart-card img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.custom-product-title {
+    margin: 0;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust the maximum width as needed */
+    transition: max-width 0.3s;
+}
+
+.custom-product-title:hover {
+    max-width: none;
+}
+
+.custom-product-price {
+    font-weight: bold;
+}
+
+.custom-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.custom-counter-btn {
+    background: #764abc;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-counter-btn:hover {
+    background: #513282;
+}
+
+.custom-remove-btn {
     border: none;
     outline: none;
-    background: #764abc;
+    background: #ff6347;
     padding: 5px 10px;
     color: #fff;
     border-radius: 5px;
@@ -29,24 +94,6 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.btn:hover {
-    background: #513282;
-}
-
-
-.cartCount {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: 40px;
-}
-
-
-.cartCard {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* background: #fff; */
-    margin-bottom: 20px;
-    padding: 14px;
-    border-radius: 5px;
+.custom-remove-btn:hover {
+    background: #ff4731;
 }

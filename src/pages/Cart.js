@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { remove, increment, decrement } from "../store/cartSlice";
 import "./Cart.css";
 
+const formatProductPrice = (price) => {
+  // Ensure the price has two decimal places
+  return price.toFixed(2);
+};
+
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart);
@@ -22,34 +27,38 @@ const Cart = () => {
   return (
     <div>
       <h3>Cart</h3>
-      <div className="cartWrapper">
-        {products.map((product) => (
-          <div key={product.id} className="cartCard">
-            <img src={product.image} alt={product.title} className="CartImg" />
-            <h5>{product.title}</h5>
-            <h>Rs. {product.price}</h>
-            <div className="quantity">
-              <span>qty </span>
-              <button
-                className="counter-btn"
-                onClick={() => handleDecrement(product.id)}
-              >
-                -
-              </button>
-              <span> {product.quantity} </span>
-              <button
-                className="counter-btn"
-                onClick={() => handleIncrement(product.id)}
-              >
-                +
+      {products.length === 0 ? (
+        <p className="custom-cart-empty-msg">Your cart is empty!</p>
+      ) : (
+        <div className="custom-cart-wrapper">
+          {products.map((product) => (
+            <div key={product.id} className="custom-cart-card">
+              <img src={product.image} alt={product.title} className="custom-cart-img" />
+              <h5 className="custom-product-title">{product.title}</h5>
+              <p className="custom-product-price">Rs. {formatProductPrice(product.price)}</p>
+              <div className="custom-quantity">
+                <span>qty </span>
+                <button
+                  className="custom-counter-btn"
+                  onClick={() => handleDecrement(product.id)}
+                >
+                  -
+                </button>
+                <span> {product.quantity} </span>
+                <button
+                  className="custom-counter-btn"
+                  onClick={() => handleIncrement(product.id)}
+                >
+                  +
+                </button>
+              </div>
+              <button className="custom-remove-btn" onClick={() => handleRemove(product.id)}>
+                Remove
               </button>
             </div>
-            <button className="btn" onClick={() => handleRemove(product.id)}>
-              Remove
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -36,7 +36,9 @@ const Navbar = () => {
 
   return (
     <div style={navbarStyle}>
-      <span style={logoStyle}>MyStore</span>
+      <Link to="/" style={logoStyle}>
+        MyStore
+      </Link>
       <div>
         <Link style={linkStyle} to="/">
           Home
