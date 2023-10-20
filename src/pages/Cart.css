@@ -45,7 +45,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px; /* Adjust the maximum width as needed */
+    max-width: 200px;
     transition: max-width 0.3s;
 }
 

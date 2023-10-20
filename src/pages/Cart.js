@@ -1,10 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { remove, increment, decrement } from "../store/cartSlice";
+import { remove, updateQuantity } from "../store/cartSlice";
 import "./Cart.css";
 
 const formatProductPrice = (price) => {
-  // Ensure the price has two decimal places
   return price.toFixed(2);
 };
 
@@ -17,11 +16,17 @@ const Cart = () => {
   };
 
   const handleIncrement = (productId) => {
-    dispatch(increment(productId));
+    const item = products.find((item) => item.id === productId);
+    if (item) {
+      dispatch(updateQuantity({ id: productId, quantity: item.quantity + 1 }));
+    }
   };
 
   const handleDecrement = (productId) => {
-    dispatch(decrement(productId));
+    const item = products.find((item) => item.id === productId);
+    if (item && item.quantity > 1) {
+      dispatch(updateQuantity({ id: productId, quantity: item.quantity - 1 }));
+    }
   };
 
   return (
@@ -33,9 +38,15 @@ const Cart = () => {
         <div className="custom-cart-wrapper">
           {products.map((product) => (
             <div key={product.id} className="custom-cart-card">
-              <img src={product.image} alt={product.title} className="custom-cart-img" />
+              <img
+                src={product.image}
+                alt={product.title}
+                className="custom-cart-img"
+              />
               <h5 className="custom-product-title">{product.title}</h5>
-              <p className="custom-product-price">Rs. {formatProductPrice(product.price)}</p>
+              <p className="custom-product-price">
+                $ {formatProductPrice(product.price)}
+              </p>
               <div className="custom-quantity">
                 <span>qty </span>
                 <button
@@ -44,7 +55,7 @@ const Cart = () => {
                 >
                   -
                 </button>
-                <span> {product.quantity} </span>
+                <span>{product.quantity}</span>
                 <button
                   className="custom-counter-btn"
                   onClick={() => handleIncrement(product.id)}
@@ -52,7 +63,10 @@ const Cart = () => {
                   +
                 </button>
               </div>
-              <button className="custom-remove-btn" onClick={() => handleRemove(product.id)}>
+              <button
+                className="custom-remove-btn"
+                onClick={() => handleRemove(product.id)}
+              >
                 Remove
               </button>
             </div>

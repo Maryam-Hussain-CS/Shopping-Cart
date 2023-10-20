@@ -66,7 +66,7 @@ const Products = () => {
             <div className="product-content">
               <h4>{product.title}</h4>
               <p>Category: {product.category}</p>
-              <p>Price: Rs. {product.price}</p>
+              <p>Price: $ {product.price}</p>
             </div>
           </Link>
         </div>

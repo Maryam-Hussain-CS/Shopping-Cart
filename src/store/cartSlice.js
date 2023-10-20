@@ -21,20 +21,15 @@ const cartSlice = createSlice({
     clear(state) {
       state.length = 0;
     },
-    increment(state, action) {
-      const item = state.find((item) => item.id === action.payload);
+    updateQuantity(state, action) {
+      const { id, quantity } = action.payload;
+      const item = state.find((item) => item.id === id);
       if (item) {
-        item.quantity += 1;
-      }
-    },
-    decrement(state, action) {
-      const item = state.find((item) => item.id === action.payload);
-      if (item && item.quantity > 1) {
-        item.quantity -= 1;
+        item.quantity = quantity;
       }
     },
   },
 });
 
-export const { add, remove, clear, increment, decrement } = cartSlice.actions;
+export const { add, remove, clear, updateQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
