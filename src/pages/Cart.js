@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { remove, updateQuantity } from "../store/cartSlice";
+import { remove, updateQuantity, clear } from "../store/cartSlice";
 import "./Cart.css";
 
 const formatProductPrice = (price) => {
@@ -29,6 +29,27 @@ const Cart = () => {
     }
   };
 
+  const [isOrderConfirmed, setOrderConfirmed] = useState(false);
+
+  const handleConfirmOrder = () => {
+    dispatch(clear());
+    setOrderConfirmed(true);
+  };
+
+  useEffect(() => {
+    if (isOrderConfirmed) {
+      const timeout = setTimeout(() => {
+        setOrderConfirmed(false);
+      }, 1500);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isOrderConfirmed]);
+
+  const totalCost = products.reduce((acc, product) => {
+    return acc + product.price * product.quantity;
+  }, 0);
+
   return (
     <div>
       <h3>Cart</h3>
@@ -36,41 +57,58 @@ const Cart = () => {
         <p className="custom-cart-empty-msg">Your cart is empty!</p>
       ) : (
         <div className="custom-cart-wrapper">
-          {products.map((product) => (
-            <div key={product.id} className="custom-cart-card">
-              <img
-                src={product.image}
-                alt={product.title}
-                className="custom-cart-img"
-              />
-              <h5 className="custom-product-title">{product.title}</h5>
-              <p className="custom-product-price">
-                $ {formatProductPrice(product.price)}
-              </p>
-              <div className="custom-quantity">
-                <span>qty </span>
+          <div className="custom-cart-content">
+            {products.map((product) => (
+              <div key={product.id} className="custom-cart-card">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="custom-cart-img"
+                />
+                <h5 className="custom-product-title">{product.title}</h5>
+                <p className="custom-product-price">
+                  $ {formatProductPrice(product.price)}
+                </p>
+                <div className="custom-quantity">
+                  <span>Quantity </span>
+                  <button
+                    className="custom-counter-btn"
+                    onClick={() => handleDecrement(product.id)}
+                  >
+                    -
+                  </button>
+                  <span>{product.quantity}</span>
+                  <button
+                    className="custom-counter-btn"
+                    onClick={() => handleIncrement(product.id)}
+                  >
+                    +
+                  </button>
+                </div>
                 <button
-                  className="custom-counter-btn"
-                  onClick={() => handleDecrement(product.id)}
+                  className="custom-remove-btn"
+                  onClick={() => handleRemove(product.id)}
                 >
-                  -
-                </button>
-                <span>{product.quantity}</span>
-                <button
-                  className="custom-counter-btn"
-                  onClick={() => handleIncrement(product.id)}
-                >
-                  +
+                  Remove
                 </button>
               </div>
-              <button
-                className="custom-remove-btn"
-                onClick={() => handleRemove(product.id)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="custom-total">
+            <p className="TotalText">
+              <strong>Total: </strong>${formatProductPrice(totalCost)}
+            </p>
+          </div>
+          <div className="custom-confirm-order">
+            <button className="custom-confirm-btn" onClick={handleConfirmOrder}>
+              Confirm Order
+            </button>
+          </div>
+        </div>
+      )}
+      {isOrderConfirmed && (
+        <div className="custom-order-confirmation active">
+          <p>Order placed successfully</p>
         </div>
       )}
     </div>

@@ -7,6 +7,7 @@ import {
   setStatus,
   clear,
 } from "../store/productSlice";
+import { API_URL } from "../apiConfig";
 import { STATUSES } from "../store/productSlice";
 import "./Products.css";
 
@@ -15,14 +16,15 @@ const Products = () => {
   const { data: products, status } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(setStatus(STATUSES.LOADING));
-
     const fetchData = async () => {
       try {
-        const res = await fetch("https://fakestoreapi.com/products");
+        dispatch(setStatus(STATUSES.LOADING));
+        const res = await fetch(API_URL);
+
         if (!res.ok) {
           throw Error(`HTTP error! Status: ${res.status}`);
         }
+
         const data = await res.json();
         dispatch(setProducts(data));
         dispatch(setStatus(STATUSES.IDLE));
