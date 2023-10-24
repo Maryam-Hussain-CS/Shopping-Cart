@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add, updateQuantity } from "../store/cartSlice";
 import "./ProductDetail.css";
@@ -11,29 +11,25 @@ const ProductDetail = () => {
   const existingItem = cartItems.find((item) => item.id === product.id);
   const isItemInCart = existingItem !== undefined;
 
-  const incrementQuantity = () => {
-    if (existingItem) {
-      dispatch(
-        updateQuantity({ id: product.id, quantity: existingItem.quantity + 1 })
-      );
-    }
-  };
-
-  const decrementQuantity = () => {
-    if (existingItem && existingItem.quantity > 1) {
-      dispatch(
-        updateQuantity({
-          id: product.id,
-          quantity: existingItem.quantity - 1,
-        })
-      );
-    }
-  };
+  const [quantity, setQuantity] = useState(
+    isItemInCart ? existingItem.quantity : 1
+  );
 
   const handleAddToCart = () => {
     if (existingItem) {
+      dispatch(updateQuantity({ id: product.id, quantity }));
     } else {
-      dispatch(add({ ...product, quantity: 1 }));
+      dispatch(add({ ...product, quantity }));
+    }
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
 
@@ -69,7 +65,7 @@ const ProductDetail = () => {
             <button className="counter-btn" onClick={decrementQuantity}>
               -
             </button>
-            <span>{isItemInCart ? existingItem.quantity : 1}</span>
+            <span>{quantity}</span>
             <button className="counter-btn" onClick={incrementQuantity}>
               +
             </button>
