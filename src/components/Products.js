@@ -7,7 +7,7 @@ import {
   setStatus,
   clear,
 } from "../store/productSlice";
-import { API_URL } from "../apiConfig";
+import { API_URL } from "../services/apiConfig";
 import { STATUSES } from "../store/productSlice";
 import "./Products.css";
 

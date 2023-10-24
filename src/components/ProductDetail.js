@@ -8,7 +8,7 @@ const ProductDetail = () => {
   const product = useSelector((state) => state.product.selectedProduct);
   const cartItems = useSelector((state) => state.cart);
 
-  const existingItem = cartItems.find((item) => item.id === product.id);
+  const existingItem = cartItems.find((item) => item.id === product?.id);
   const isItemInCart = existingItem !== undefined;
 
   const [quantity, setQuantity] = useState(
